@@ -1,0 +1,20 @@
+version: '3.4'
+services:
+  metaweather:
+    image: metaweather:latest
+    build:
+      context: .
+    ports:
+      - "8080:80"
+  db:
+    hostname: db
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    volumes: 
+     - ./db-data:/var/lib/mysql:rw
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+volumes:
+  db-data:      
